@@ -26,7 +26,7 @@
 void app_main() {
 
 	// initialize the u8g2 hal
-	u8g2_esp32_hal_t u8g2_esp32_hal = U8G2_ESP32_HAL_DEFAULT;
+	u8g2_esp32_hal_t u8g2_esp32_hal; // = U8G2_ESP32_HAL_DEFAULT;
 	/*u8g2_esp32_hal.sda = PIN_SDA;
 	u8g2_esp32_hal.scl = PIN_SCL;*/
 	u8g2_esp32_hal.clk   = PIN_CLK;
@@ -55,13 +55,13 @@ void app_main() {
 
 	// loop
 	while(1) {
-		/*
+
 		// draw the hourglass animation, full-half-empty
 		u8g2_ClearBuffer(&u8g2);
 		u8g2_DrawXBM(&u8g2, 34, 2, 60, 60, hourglass_full);
 		u8g2_SendBuffer(&u8g2);
 		vTaskDelay(1000 / portTICK_RATE_MS);
-		
+		/*
 		u8g2_ClearBuffer(&u8g2);
 		u8g2_DrawXBM(&u8g2, 34, 2, 60, 60, hourglass_half);
 		u8g2_SendBuffer(&u8g2);
