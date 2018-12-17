@@ -9,33 +9,177 @@
 #include "u8g2_esp32_hal.h"
 #include "icons.h"
 
-
+static uint8_t TempStr[10];
 
 void app_main() {
 
 
-	U8g2Hal_I2C_Oled_Init();   /* Init I2C OLED display */
+//	U8g2Hal_I2C_Oled_Init();   /* Init I2C OLED display */
 	U8g2Hal_SPI_Oled_Init();   /* Init SPI OLED display */
 
+	u8g2_SetDrawColor(&U8g2Hal_SPI_Oled_Handle,1);
+			u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
 	while(1){
 
-		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
-		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 1, 1, 62, 62, termo_icon14);
-		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawBox(&U8g2Hal_SPI_Oled_Handle,1,1,20,62);
+		// u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon2);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
 		vTaskDelay(2000 / portTICK_RATE_MS);
+/*
+		u8g2_SetDrawColor(&U8g2Hal_I2C_Oled_Handle,0);
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 1, 1, 62, 62, termo_icon2);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);*/
+	}
 
+	while(1){
+		u8g2_SetDrawColor(&U8g2Hal_I2C_Oled_Handle,1);
+	//	u8g2_SetBitmapMode(&U8g2Hal_I2C_Oled_Handle,0);
+		u8g2_DrawBox(&U8g2Hal_I2C_Oled_Handle,1,1,126,62);
+		//u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(500 / portTICK_RATE_MS);
 
 		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
 		u8g2_SetFont(&U8g2Hal_I2C_Oled_Handle, u8g2_font_timR14_tf);
 		u8g2_DrawStr(&U8g2Hal_I2C_Oled_Handle, 2,17,"Termometru!");
-		u8g2_DrawStr(&U8g2Hal_I2C_Oled_Handle, 32,50,"99.49xyC");
 		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
 		vTaskDelay(500 / portTICK_RATE_MS);
+/*
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon2);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
 
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon12);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
 
-		/***********************************************************/
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon13);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon11);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon5);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon6);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon7);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon12);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon9);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon10);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon13);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_I2C_Oled_Handle, 30, 1, 62, 62, termo_icon14);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_I2C_Oled_Handle);
+		u8g2_SetFont(&U8g2Hal_I2C_Oled_Handle, u8g2_font_timR14_tf);
+		u8g2_DrawStr(&U8g2Hal_I2C_Oled_Handle, 2,17,"Termometru!");
+		//strcpy((char *)&TempStr, "22.75");
+		strcpy((char *)&TempStr, "°C");
+		u8g2_DrawStr(&U8g2Hal_I2C_Oled_Handle, 32,50, (const char *)&TempStr);
+		u8g2_SendBuffer(&U8g2Hal_I2C_Oled_Handle);
+		vTaskDelay(500 / portTICK_RATE_MS);
+*/
+
+		/*****************************SPI******************************/
+		u8g2_SetDrawColor(&U8g2Hal_SPI_Oled_Handle,0);
+	//	u8g2_SetBitmapMode(&U8g2Hal_I2C_Oled_Handle,0);
+		//u8g2_DrawBox(&U8g2Hal_SPI_Oled_Handle,1,1,126,62);
+		//u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+	//	vTaskDelay(7500 / portTICK_RATE_MS);
+
 		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
-		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 34, 1, 62, 62, termo_icon14);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon2);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon12);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon13);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon11);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon5);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon6);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon7);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon12);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon9);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon10);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon13);
+		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
+		vTaskDelay(2000 / portTICK_RATE_MS);
+
+		u8g2_ClearBuffer(&U8g2Hal_SPI_Oled_Handle);
+		u8g2_DrawXBM(&U8g2Hal_SPI_Oled_Handle, 1, 1, 62, 62, termo_icon14);
 		u8g2_SendBuffer(&U8g2Hal_SPI_Oled_Handle);
 		vTaskDelay(2000 / portTICK_RATE_MS);
 

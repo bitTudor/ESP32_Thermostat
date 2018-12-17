@@ -289,6 +289,7 @@ uint8_t  U8g2Hal_GpioDelay_CB(u8x8_t  *u8x8,
 
 		case U8X8_MSG_DELAY_MILLI:                                     /* Delay for the number of milliseconds passed in through arg_int. */
 			vTaskDelay(arg_int/portTICK_PERIOD_MS);
+			//vTaskDelay(arg_int/10000);
 			break;
 	}
 	return 0;
